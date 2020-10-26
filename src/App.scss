@@ -1,0 +1,9 @@
+body{
+    background-color: aqua;
+}
+
+.products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
