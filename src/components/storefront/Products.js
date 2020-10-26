@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import {connect} from 'react-redux';
+import {addToCart} from '../../store/cart';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -9,10 +10,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    margin:40,
   },
 });
 
@@ -21,11 +24,11 @@ const Products = props => {
   const classes = useStyles();
 
   return (
-    <section className='product'>
-      <ul>
+    <section className='product' >
+      <Box display="flex" flexDirection="row">
         {props.products.displayed.map( product => {
           return (
-            <Card className={classes.root}>
+            <Card className={classes.root} flexDirection="row" flexWrap="wrap">
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -42,7 +45,7 @@ const Products = props => {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button onClick={()=>props.addToCart(product)}size="small" color="primary">
           ADD TO CART
                 </Button>
                 <Button size="small" color="primary">
@@ -52,16 +55,17 @@ const Products = props => {
             </Card>
 
           );
-          // <li key={product.name}>{product.name}</li>;
         })}
-
-      </ul>
+      </Box>
     </section>
   );
 };
 
 const mapStateToProps = state => ({
   products: state.products,
+  content: state.cart.content,
 });
+
+const mapDispatchToProps = {addToCart};
   
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

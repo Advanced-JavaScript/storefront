@@ -21,7 +21,7 @@ const initialState = {
     },
     {
       name: 'Carrots',
-      description: 'To look orangebe healthy',
+      description: 'To be healthy',
       price: '$1.99',
       inventory: 100,
       image:'https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg',

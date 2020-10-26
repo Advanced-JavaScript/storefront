@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+
 }));
 
 
@@ -63,6 +64,8 @@ const Categories = props => {
 
   return (
     <div className={classes.root}>
+      <h2>{props.categories.activeCategory.displayName}</h2>
+
       <h2>Browse Our Categories</h2>
       <AppBar position="static" color="white">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
@@ -75,6 +78,7 @@ const Categories = props => {
       </AppBar>
      
     </div>
+    
   );
   
 };

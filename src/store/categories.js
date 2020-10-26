@@ -15,9 +15,9 @@ const initialState = {
     },
   },
   activeCategory: {
-    name: 'Electronics products',
-    displayName: 'Electronics',
-    description: 'Every device you can use',
+    name: '',
+    displayName: '',
+    description: '',
   },
 };
 

@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Simplecart from './storefront/Simplecart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +32,7 @@ export default () => {
           <Typography variant="h6" className={classes.title}>
           Our Store
           </Typography>
-          <Button color="inherit">CART(0)</Button>
+          <Simplecart />
         </Toolbar>
       </AppBar>
     </div>
