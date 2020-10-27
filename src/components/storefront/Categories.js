@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {setActive} from '../../store/categories';
-
+import {setActive, getCategories} from '../../store/categories';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -62,16 +61,24 @@ const Categories = props => {
     setValue(newValue);
   };
 
+  useEffect( () => {
+    props.getCategories();
+  }, []);
+
   return (
     <div className={classes.root}>
-      <h2>{props.categories.activeCategory.displayName}</h2>
+      <h2>{props.categories.activeCategory.display_name}</h2>
 
       <h2>Browse Our Categories</h2>
       <AppBar position="static" color="white">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           {Object.keys(props.categories.categories).map((category,i) => {
+            {console.log(category);}
             return (
-              <Tab label={props.categories.categories[category].displayName} {...a11yProps(i)} key={category} onClick={()=>props.setActive(category)}/>
+              <Tab label={props.categories.categories[category].display_name}
+                {...a11yProps(i)}
+                key={category}
+                onClick={()=>props.setActive(props.categories.categories[category])}/>
             ); 
           })}
         </Tabs>
@@ -87,6 +94,6 @@ const mapStateToProps = state => ({
   categories: state.categories,
 });
 
-const mapDispatchToProps = {setActive};
+const mapDispatchToProps = {setActive, getCategories};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

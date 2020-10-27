@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {addToCart} from '../../store/cart';
+import {getProducts} from '../../store/products';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -22,10 +23,14 @@ const useStyles = makeStyles({
 
 const Products = props => {
   const classes = useStyles();
+  useEffect( () => {
+    props.getProducts();
+  }, []);
 
   return (
     <section className='product' >
       <Box display="flex" flexDirection="row">
+        {console.log(props.products)}
         {props.products.displayed.map( product => {
           return (
             <Card className={classes.root} flexDirection="row" flexWrap="wrap">
@@ -66,6 +71,6 @@ const mapStateToProps = state => ({
   content: state.cart.content,
 });
 
-const mapDispatchToProps = {addToCart};
+const mapDispatchToProps = {addToCart, getProducts};
   
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

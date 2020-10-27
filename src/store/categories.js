@@ -1,23 +1,12 @@
 /* eslint-disable no-case-declarations */
 'use strict';
 
+import axios from 'axios';
+
 const initialState = {
   categories: {
-    electronics: {
-      name: 'Electronics products',
-      displayName: 'Electronics',
-      description: 'Every device you can use',
-    },
-    food: {
-      name: 'Food products',
-      displayName: 'Food',
-      description: 'Everthing you can eat',
-    },
   },
   activeCategory: {
-    name: '',
-    displayName: '',
-    description: '',
   },
 };
 
@@ -26,10 +15,10 @@ export default (state=initialState, action) => {
 
   switch(type){
   case 'change':
-    let categories = state.categories;
-    let activeCategory = categories[payload];
-    return { activeCategory, categories};
-
+    return {...state, activeCategory: payload};
+  case 'GetCategories':
+    return {...state, categories: payload};
+  
   default:
     return state;
   }
@@ -41,3 +30,32 @@ export const setActive = active => {
     payload: active,
   };
 };
+
+export const getCategories = () => {
+  return async dispatch => {
+    const res = await axios.get('https://ash-todolist.herokuapp.com/categories');
+    dispatch({
+      type: 'GetCategories',
+      payload: res.data.results,
+    });
+
+  };
+};
+
+// categories: {
+//   electronics: {
+//     name: 'Electronics products',
+//     displayName: 'Electronics',
+//     description: 'Every device you can use',
+//   },
+//   food: {
+//     name: 'Food products',
+//     displayName: 'Food',
+//     description: 'Everthing you can eat',
+//   },
+// },
+// activeCategory: {
+//   name: '',
+//   displayName: '',
+//   description: '',
+// },
