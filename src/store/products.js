@@ -20,7 +20,10 @@ export default (state = initialState, action) => {
 
   case 'GetProducts':
     return {...state, products: payload};
-
+  case 'putProduct':
+    return {...state, products: payload};
+  case 'deleteProduct':
+    return {...state, products: payload};
   default: 
     return state;
   }
@@ -34,7 +37,26 @@ export const getProducts = () => {
       type: 'GetProducts',
       payload: res.data.results,
     });
+  };
+};
 
+export const putProduct = (id, body) => {
+  return async dispatch => {
+    let res = await axios.put(`https://ash-todolist.herokuapp.com/products/${id}`, body);
+    dispatch({
+      type: 'PutProduct',
+      payload: res.data.results,
+    });
+  };
+};
+
+export const deleteProduct = id => async dispatch => {
+  return async dispatch => {
+    let res = await axios.delete(`https://ash-todolist.herokuapp.com/products/${id}`);
+    dispatch({
+      type: 'DeleteProduct',
+      payload: res.data.results,
+    });
   };
 };
 
