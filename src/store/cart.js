@@ -4,6 +4,7 @@
 
 const initialState = {
   content :[],
+  total: 0,
 };
 
 export default (state = initialState, action) => {
@@ -12,7 +13,8 @@ export default (state = initialState, action) => {
   switch(type){
   case 'addToCart':
     let update = state.content.push(payload);
-    return {...state, update};
+    let total = state.total + 10;
+    return {...state, update, total};
   case 'removeFromCart':
     state.content.splice(state.content.indexOf(payload),1);
     return {...state};

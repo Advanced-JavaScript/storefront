@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { Button } from '@material-ui/core';
 import React from 'react';
-import {removeFromCart} from '../../store/cart';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import {removeFromCart} from '../../store/cart';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
+import { Button } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -78,6 +79,9 @@ const Simplecart = props => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList  autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem>
+                      <Link to={`/cart`} 
+                        activeClassName="current">SHOW CART</Link></MenuItem>
                     {props.content.map(product => {
                       return (
                         <MenuItem> {product.name} <HighlightOffIcon onClick={()=>{props.removeFromCart(product);}}></HighlightOffIcon>
