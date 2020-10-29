@@ -5,6 +5,7 @@ import axios from 'axios';
 const initialState = {
   products: [],
   displayed: [],
+  productDetails:{},
 };
 //Reducer
 export default (state = initialState, action) => {
@@ -13,13 +14,17 @@ export default (state = initialState, action) => {
   switch(type){
   case 'change':
     let displayed = state.products.filter(product => {
-      console.log('/////', product, payload);
       return product.category === payload.name;
     });
     return {...state, displayed};
 
   case 'GetProducts':
     return {...state, products: payload};
+  case 'GetProduct':
+    let productDetails = state.products.filter(product => {
+      return product._id === payload;
+    });
+    return {...state, productDetails};
   case 'putProduct':
     return {...state, products: payload};
   case 'deleteProduct':
@@ -37,6 +42,13 @@ export const getProducts = () => {
       type: 'GetProducts',
       payload: res.data.results,
     });
+  };
+};
+
+export const productDetails = id => {
+  return{
+    type: 'GetProduct',
+    payload: id,
   };
 };
 

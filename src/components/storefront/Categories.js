@@ -73,7 +73,6 @@ const Categories = props => {
       <AppBar position="static" color="white">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           {Object.keys(props.categories.categories).map((category,i) => {
-            {console.log(category);}
             return (
               <Tab label={props.categories.categories[category].display_name}
                 {...a11yProps(i)}
